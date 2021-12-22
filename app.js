@@ -19,7 +19,21 @@ function prayerTimes(latitude, longitude){
     .then(function(response){
         let date = new Date();
         let today = date.getDate()-1;
-        console.log(response.data[today].timings);
+        let data = response.data[today].timings;
+        let app = document.getElementById('container');
+        let table = document.createElement('table');
+        let tableBody = document.createElement('tbody');
+        
+        for(i in data){
+            let row = tableBody.insertRow();
+            let name = row.insertCell(0);
+            let time = row.insertCell(1);
+            name.innerHTML = i;
+            time.innerHTML = data[i];
+            tableBody.appendChild(row);
+        }
+        table.appendChild(tableBody);
+        app.appendChild(table);
     });
 }
 

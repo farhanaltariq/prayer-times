@@ -25,6 +25,7 @@ function prayerTimes(latitude, longitude){
         let data = response.data[today].timings;
         let app = document.getElementById('container');
         let table = document.createElement('table');
+        table.className = 'table text-center';
         let tableBody = document.createElement('tbody');
         
         for(i in data){
@@ -45,8 +46,15 @@ function index(){
     let app         = document.getElementById('container');
     let h3          = document.createElement('h3');
     h3.innerHTML    = 'Prayer Times';
-
+    h3.className    = 'text-center bg-info text-light';
     app.appendChild(h3);
+
+    // let location    = document.createElement('h6');
+    // location.innerHTML = '<br>Location&nbsp; : ';
+    // app.appendChild(location);
+    // let method      = document.createElement('span');
+    // method.innerHTML = 'Method&nbsp;&nbsp;&nbsp; : <br><br>';
+    app.appendChild(method);
 }
 
 index();

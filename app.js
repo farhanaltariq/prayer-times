@@ -2,7 +2,10 @@ function success(position){
     prayerTimes(position.coords.latitude, position.coords.longitude);
 }
 function error(){
-    alert('Gagal mendapatkan lokasi');
+    let defaultLatitude = -6.200000;
+    let defaultLongtitude = 106.816666;
+    prayerTimes(defaultLatitude, defaultLongtitude);
+    // alert('Gagal mendapatkan lokasi');
 }
 
 function getUserLocation(){
@@ -14,7 +17,7 @@ function getUserLocation(){
 }
 
 function prayerTimes(latitude, longitude){
-    fetch('http://api.aladhan.com/v1/calendar?latitude='+latitude+'&longitude='+longitude+'&method=2')
+    fetch('http://api.aladhan.com/v1/calendar?latitude='+latitude+'&longitude='+longitude+'&method=4')
     .then(response => response.json())
     .then(function(response){
         let date = new Date();

@@ -8,8 +8,9 @@ body{
     font-size: 1.1em;
     margin-bottom: 2px;
     padding: 0.3em;
-    background: lightgreen;
+    background: #17a2b8;
     text-align: center;
+    color: white;
 }
 #container table{
     border-collapse: collapse;
@@ -22,11 +23,12 @@ body{
 #container table td:last-child{
     text-align: end;
 }
-#container table tr:nth-child(even){
-    background-color: lightgray;
+#container .table-stripped tr:nth-child(even){
+    background-color: darkgray;
+    color: white;
 }
-#container table tr:hover{
-    background-color: lightgreen;
+#container .table-stripped tr:hover{
+    background-color: salmon;
     color: white;
     cursor: pointer;
 }

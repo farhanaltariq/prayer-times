@@ -28,7 +28,7 @@ body{
     color: white;
 }
 #container .table-stripped tr:hover{
-    background-color: salmon;
+    background-color: #B3C7D6FF;
     color: white;
     cursor: pointer;
 }

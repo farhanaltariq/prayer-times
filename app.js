@@ -1,17 +1,14 @@
-function checkCalculationMethod(method, text = 'test'){
-    console.log(method);
-    switch(method){
-        case 4 :
-            text = 'Umm Al-Qura University, Makkah';
-            break;
-        default :
-            text = 'Test';
-    }
+var tempPos;
+let globalMethod = 4;
 
+function checkCalculationMethod(method){
+    let text = document.getElementById('method'+method).textContent;
     let methodField = document.getElementById('dropdownMenu2');
     methodField.innerHTML = text;
 }
 
+// Get data from API then display location
+// (Reverse Geocoding)
 function showLocation(latitude, longitude){
     let url = 'https://nominatim.openstreetmap.org/reverse?format=json&lat='+latitude+'&lon='+longitude+'&zoom=18&addressdetails=1'
     // let url = 'https://geocode.xyz/'+latitude+','+longitude+'111.530014?json=1';        //API from geocode, slow response
@@ -31,30 +28,36 @@ function showLocation(latitude, longitude){
     });
 }
 
-function prayerTimes(latitude, longitude, method = 4){
-    console.log(method);
-    checkCalculationMethod(method);
+//To clear a table before update
+//For changing method
+function clearTables(){
+    let target = document.getElementById('dataTable');
+    target.remove();
+}
 
-    fetch('http://api.aladhan.com/v1/calendar?latitude='+latitude+'&longitude='+longitude+'&method='+method)
+//Get data from API then display into a table
+function prayerTimes(latitude, longitude){
+    checkCalculationMethod(globalMethod);
+
+    fetch('https://api.aladhan.com/v1/calendar?latitude='+latitude+'&longitude='+longitude+'&method='+globalMethod)
     .then(response => response.json())
     .then(function(response){
         // console.log(response);
-        let date = new Date();
-        let today = date.getDate()-1;  2
-        let data = response.data[today].timings;
-        let app = document.getElementById('container');
-        let table = document.createElement('table');
+        let date        = new Date();
+        let today       = date.getDate()-1;  2
+        let data        = response.data[today].timings;
+        let app         = document.getElementById('container');
+        let table       = document.createElement('table');
+        table.id        = 'dataTable';
         table.className = 'table text-center table-stripped';
-        let tableBody = document.createElement('tbody');
+        let tableBody   = document.createElement('tbody');
         
-        console.log(data);
-
         for(i in data){
-            let row = tableBody.insertRow();
-            let name = row.insertCell(0);
-            let time = row.insertCell(1);
-            name.innerHTML = i;
-            time.innerHTML = data[i];
+            let row         = tableBody.insertRow();
+            let name        = row.insertCell(0);
+            let time        = row.insertCell(1);
+            name.innerHTML  = i;
+            time.innerHTML  = data[i];
             tableBody.appendChild(row);
         }
         table.appendChild(tableBody);
@@ -62,33 +65,50 @@ function prayerTimes(latitude, longitude, method = 4){
     });
 }
 
+//Call showLocation and prayerTimes function if location succesfully acquired
 function success(position){
+    tempPos = position;
     showLocation(position.coords.latitude, position.coords.longitude);
     prayerTimes(position.coords.latitude, position.coords.longitude);
 }
 
+//If failed to get data from user
+//Set default location to Jakarta, Indonesia
 function error(){
     let defaultLatitude = -6.200000;
     let defaultLongtitude = 106.816666;
-    prayerTimes(defaultLatitude, defaultLongtitude);
+    prayerTimes(defaultLatitude, defaultLongtitude, globalMethod);
     // alert('Gagal mendapatkan lokasi');
     let locationField   = document.getElementById('location');
-    let text            = document.createTextNode('Jakarta, Indonesia');
-    locationField.appendChild(text);
+    locationField.innerHTML = 'Jakarta, Indonesia';
 }
 
+
+//Get geolocation from user
 function getUserLocation(){
     if(!navigator.geolocation){
-        alert('Geolocation tidak didukung di browser yang anda gunakan, silahkan gunakan browser lain');
+        alert('Geolocation not supported in your browser, please use another browser');
     } else{
         navigator.geolocation.getCurrentPosition(success, error);
     }
 }
 
+//Start function from getUserLocation
+getUserLocation();
 
+//Create clickListener
+for(let i = 0; i< 16; i++){
+    //Skip 6 because method6 is not defined
+    if(i === 6)
+        continue;
 
-function index(){
-    getUserLocation();
+    document.getElementById('method'+i).onclick = function(){
+        globalMethod = i;
+        clearTables();
+        if (typeof tempPos === 'undefined') {
+            error();
+        } else{
+            prayerTimes(tempPos.coords.latitude, tempPos.coords.longitude);
+        }
+    };
 }
-
-index();

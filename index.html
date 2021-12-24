@@ -5,12 +5,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prayer Times</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <link rel='stylesheet' href = 'style.css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src = 'app.js'></script>
+
 </head>
     <body class="d-flex flex-column h-100">
         <div class='container-fluid'>
             <div id='container'>
+                <h3>Prayer Times</h3>
+                <table>
+                    <tr>
+                        <td><span><br>Location </span></td>
+                        <td><span id="location"></span></td>
+                    </tr>
+                    <tr>
+                        <td><span><br>Calculation Method </span></td>
+                        <td>
+                            <span class="dropdown">
+                            <button class="btn-sm btn-info dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Method
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                              <button class="dropdown-item" id="method0" type="button">Shia Ithna-Ansari</button>
+                              <button class="dropdown-item" id="method1" type="button">University of Islamic Sciences, Karachi</button>
+                              <button class="dropdown-item" id="method2" type="button">Islamic Society of North America</button>
+                              <button class="dropdown-item" id="method3" type="button">Muslim World League</button>
+                              <button class="dropdown-item" id="method4" type="button">Umm Al-Qura University, Makkah</button>
+                              <button class="dropdown-item" id="method5" type="button">Egyptian General Authority of Survey</button>
+                              <button class="dropdown-item" id="method7" type="button">Institute of Geophysics, University of Tehran</button>
+                              <button class="dropdown-item" id="method8" type="button">Gulf Region</button>
+                              <button class="dropdown-item" id="method9" type="button">Kuwait</button>
+                              <button class="dropdown-item" id="method10" type="button">Qatar</button>
+                              <button class="dropdown-item" id="method11" type="button">Majlis Ugama Islam Singapura, Singapore</button>
+                              <button class="dropdown-item" id="method12" type="button">Union Organization islamic de France</button>
+                              <button class="dropdown-item" id="method13" type="button">Diyanet İşleri Başkanlığı, Turkey</button>
+                              <button class="dropdown-item" id="method14" type="button">Spiritual Administration of Muslims of Russia</button>
+                              <button class="dropdown-item" id="method15" type="button">Moonsighting Committee Worldwide (also requires shafaq paramteer)</button>
+                            </div>
+                          </span>
+                    </td>
+                    </tr>
+                </table>
+                <hr>
             </div>
             <div id="credit" class="footer mt-auto py-3 bg-light text-center">
                 Time calculation provided by <a href="https://aladhan.com/credits-and-terms">Aladhan</a> |
@@ -19,5 +62,4 @@
             </div>
         </div>
     </body>
-    <script src = 'app.js'></script>
 </html>
